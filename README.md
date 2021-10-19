@@ -22,7 +22,7 @@ Nota: En los escenarios de prueba de KMS se obtiene un promedio de 5 peticiones 
 
 `ThrottlingException: You have exceeded the rate at which you may call KMS. Reduce the frequency of your calls.`
 
-#### Costo aproximado KMS
+#### Costo mensual aproximado - KMS
 
 | Precio       |                                 |
 |--------------|---------------------------------|
