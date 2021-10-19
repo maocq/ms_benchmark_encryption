@@ -1,0 +1,6 @@
+concurrency, throughput, mean latency, p90 latency, max latency
+10, 230, 43, 68, 194
+20, 591, 34, 65, 1021
+30, 423, 60, 71, 5983
+40, 491, 73, 78, 5308
+50, 542, 81, 91, 6798
