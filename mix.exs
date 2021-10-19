@@ -57,6 +57,7 @@ defmodule MsBenchmarkEncryption.MixProject do
       {:calendar, "~> 1.0.0"},
       {:timex, "~> 3.0"},
       {:credo_sonarqube, "~> 0.1.0"},
+      {:ex_crypto, "~> 0.10.0"},
       {:sobelow, "~> 0.8",only: :dev},
       {:dialyxir, "~> 0.4", only: :dev}
     ]

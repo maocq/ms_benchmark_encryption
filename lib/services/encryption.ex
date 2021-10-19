@@ -1,0 +1,18 @@
+defmodule Fua.Services.Encryption do
+
+  @public_key ExPublicKey.loads!("-----BEGIN RSA PUBLIC KEY-----\nMIIBCgKCAQEA5i4HAjuGgYo9Pj+IzLFaVIanTPZ06Ae041FyUIb0WAS977xRTQeP\nJMDa1WxCZWkx0/9AD98m5vXaPKX8gjdELfUJ5JYj2fx0l8O3kXSuYOpUlMXwWvkp\nfyA0a3fTjn96YWYhhy9ZY2GLFv3B23cr3TQ+mmrtKxjmeMP9MYfY6AJ5EV3o8XBo\n6/BubfJVd0PJMrla1SECUGHdn2P9+KIhRork/BX9bnjBCeWU1o/7ued6qVskINII\nLnP6nm8P49exRUBf783R6t2uLSc7MiSrPsHjXFXywt96+XiuwH1Fc1VwHUY8ob8+\nB9yKCa1usc869d8sEZCMd/hq5z2cLs/SSQIDAQAB\n-----END RSA PUBLIC KEY-----\n\n")
+  @private_key ExPublicKey.loads!("-----BEGIN RSA PRIVATE KEY-----\nMIIEpQIBAAKCAQEA5i4HAjuGgYo9Pj+IzLFaVIanTPZ06Ae041FyUIb0WAS977xR\nTQePJMDa1WxCZWkx0/9AD98m5vXaPKX8gjdELfUJ5JYj2fx0l8O3kXSuYOpUlMXw\nWvkpfyA0a3fTjn96YWYhhy9ZY2GLFv3B23cr3TQ+mmrtKxjmeMP9MYfY6AJ5EV3o\n8XBo6/BubfJVd0PJMrla1SECUGHdn2P9+KIhRork/BX9bnjBCeWU1o/7ued6qVsk\nINIILnP6nm8P49exRUBf783R6t2uLSc7MiSrPsHjXFXywt96+XiuwH1Fc1VwHUY8\nob8+B9yKCa1usc869d8sEZCMd/hq5z2cLs/SSQIDAQABAoIBACAxY82OIbvQZ8xi\n+nEWhPm5c4CyH5usKEJ6y7Azj80XrLDw97X8TqrnRjP/VjH0yoFJ+928aiZ3UDSX\nSn+z1xdOZDnSPeVpB62KNAxl81WesIG2RW2T15fuGybEtZQChE1HCX1sw+XAaMGo\ncAqP2lSvz+ms9srGSsWtM6ZPx6h7HCMcGh+IeyBfENu5v63N73YQoYjrILIRaAHj\n86SxnxcCrQPDyAM7Ow7DioUehzEigZRgRih0Ob3YjViclQuWmsmygZ8z7mm6fPis\nAxHuVRf8RZMSFRGnElqBfK7XkWWo0qIgCV+4be7cbTvBeZKj6OD1+VbDfoc/op6M\nXsT7aRkCgYEA+QClGUb/wJ6Y0TNNGhtJ4BGGYmbOLx4udSts+ZeuwI2s2DB0G8cQ\nqS9a8454ZeK31wTYeeAfKEAiZhLxF8Q+KSySTYSUq7pfiN4afO8BtqqDIX8fWvyQ\npMATRdz70TsuED8h8nkX8e4JYwnSbatfERAczXN8pg0Gz/d6txae2RcCgYEA7KX4\nLSCeuOyW+rbbp6AwunzcSf9CFAO5Pj5Xf3kaJlUN+djZPlnXE38yK4Nie6b9ETZq\nzGr5FWK4RVxZcoFAF2vROdz2vngwpnozdd7/rhOe2Kw8HnUHne43A41PEBYhOMvN\nKgwA53am2pRratFxWaHeAuCGtZOasWL4UJWlC58CgYEA0si++fTmT3JyPrXE0RLE\nqM9tCSOp6q0L+tf1+htzLUFBTglGYLVU30NdJMw4E1em9Hf/oLwe4/3WoL3sJYhU\nbppyhvhyuiSc9sm9doEE3FLfip2IN4eSEkUei4eUC/yi89HdtNrZcE1m2NXZskjd\nwx32o9zdaduhJq+CzDZz5aUCgYEAt5m0yF5MhrCYGoAQPycbZzREPOzbuWeCKvZ3\nMCEm1qKaq0NAmQ1evnOq2vOeTs0p/la32U0NXzguOzIA+8OnlAREWZ5DmVbqd97L\nWiHfQJFcZkKKih7GABO3fvv9YT+qGsSTspGJigsWPPN1u3QvexkIhDbqjKmuFP3y\nJaNUX4UCgYEAm2hucJO3uvMgGO9hOxfbB7WBJ+K/WJ2wHr10LAEn0ohofXs/veSV\nT1EJJPmZh3PJ6L44vjzAeDl9YVJ1nQP5/rPFUXJKornSpBTcwkflORubEMsi0Yfp\nRaOfXE7DMzEOw+8J9EZeA+JB67MCBT32a1w00YOVO8RXQO+Vc4T78PI=\n-----END RSA PRIVATE KEY-----\n\n")
+
+  def encrypt(text) do
+    text
+      |> Base.encode64
+      |> ExPublicKey.encrypt_public(@public_key)
+  end
+
+  def decrypt(cif) do
+    with {:ok, dec} <- ExPublicKey.decrypt_private(cif, @private_key) do
+      Base.decode64(dec)
+    end
+  end
+
+end
