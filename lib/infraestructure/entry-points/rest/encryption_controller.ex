@@ -1,5 +1,6 @@
 defmodule Fua.EntryPoint.Encryption.EncryptionController do
   alias Fua.Services.Encryption
+  alias Fua.Services.Kms
 
   use Plug.Router
   use Plug.ErrorHandler
@@ -39,6 +40,24 @@ defmodule Fua.EntryPoint.Encryption.EncryptionController do
     else error -> handle_error(error, conn) end
   end
 
+
+  post "/encrypt_kms" do
+    text = conn.body_params["text"] || "hello"
+
+    with {:ok, response} <- Kms.encrypt(text) do
+      build_response(%{status: 200, body: response}, conn)
+    else error -> handle_error(error, conn) end
+  end
+
+  post "/decrypt_kms" do
+    text = conn.body_params["text"] || "P1EJu73bKk0FcEqGQYKrLZi6sV/cp4QWKvPmLdmZcN9jV6Wv05CMFh+DsQDWuChxO9a2r8wc7H7epHNXRgguHwW+mnEc2b0hjDTTjcJvNycnHhj6c88emFia05Y0K1i8ghMZj6NtmSDKmh+DXfpLzvlPSSxwUoePY8yiK/+4T8bAuYEprPiD99sEeBhpz2yTfFJWmm98MVSfGmCcRk4xqOt/Yn0CfyNcJvmGzLyUMDFl5LVWccygT/j4c4xVQ2YVO8fYtaIYRrGxSZk/KH9Xh6Q3kDV89/rSd9sKBZU/7Wbj/jFDIi55IzTfieOPmKWKhte69Q5GEDuGMUlv63gh689woHCZSBs5UI9ciCP7kP9dbiKtTq1JrV5PxmfpWTaQX18Z9rGrOgdS5vDBFy2KpUczgiF56pUcCjfmGuJQHFiX7k6iZ67PhfslADHQlTKI1Z+54yLJdiNrjL8tV94NZSpGDM+WPn2MLWrMtmal5NupQJeypmth633Yhgg6HrrTuOTqCdp+vzPdBWE2SLIjiqWlIoAWvKW6Dobv+83gwXxf6h3xD2GUUf9dSgakdCibNwBiOkgGyA6/gbcS+u5X+ENBGZbTahT+6/rxLUWOidUG/X0g63/VKkSakTmqvXVIOd2k866Dpg2Aw7N79RenkoZTHtRt3/NfzTV9xoRw4pk="
+
+    with {:ok, response} <- Kms.decrypt(text) do
+      build_response(%{status: 200, body: response}, conn)
+    else error -> handle_error(error, conn) end
+  end
+
+
   match _ do
     %{request_path: path} = conn
     build_response(%{status: 404, body: %{status: 404, path: path}}, conn)
@@ -59,7 +78,7 @@ defmodule Fua.EntryPoint.Encryption.EncryptionController do
   end
 
   @impl Plug.ErrorHandler
-  defp handle_errors(conn, %{} = error) do
+  def handle_errors(conn, %{} = error) do
     Logger.error("Internal server - #{inspect(error)}}")
     build_response(%{status: 500, body: %{status: 500, error: "Internal server"}}, conn)
   end

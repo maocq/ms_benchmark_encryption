@@ -29,6 +29,7 @@ defmodule MsBenchmarkEncryption.MixProject do
       {:ex_aws_dynamo, "~> 4.0"},
       {:ex_aws_sts, "~> 2.0"},
       {:ex_aws_secretsmanager, "~> 2.0"},
+      {:ex_aws_kms, "~> 2.1"},
       {:hackney, "~> 1.9"},
       {:sweet_xml, "~> 0.7.0"},
       {:configparser_ex, "~> 4.0"},
