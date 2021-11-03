@@ -26,7 +26,7 @@ defmodule Fua.EntryPoint.Encryption.EncryptionController do
   end
 
   post "/encrypt" do
-    text = conn.body_params["text"] || "hello"
+    text = conn.body_params["text"] || UUID.uuid1()
 
     with {:ok, response} <- Encryption.encrypt(text) do
       build_response(%{status: 200, body: response}, conn)
@@ -42,7 +42,7 @@ defmodule Fua.EntryPoint.Encryption.EncryptionController do
   end
 
   post "/encrypt-jwk" do
-    text = conn.body_params["text"] || "hello"
+    text = conn.body_params["text"] || UUID.uuid1()
 
     with {:ok, response} <- EncryptionJwk.encrypt(text) do
       build_response(%{status: 200, body: response}, conn)
@@ -57,8 +57,16 @@ defmodule Fua.EntryPoint.Encryption.EncryptionController do
     else error -> handle_error(error, conn) end
   end
 
+  get "/encrypt-decrypt-jwk" do
+    text = UUID.uuid1()
+
+    with {:ok, response} <- EncryptionJwk.encrypt_decrypt(text) do
+      build_response(%{status: 200, body: response}, conn)
+    else error -> handle_error(error, conn) end
+  end
+
   post "/encrypt-kms" do
-    text = conn.body_params["text"] || "hello"
+    text = conn.body_params["text"] || UUID.uuid1()
 
     with {:ok, response} <- Kms.encrypt(text) do
       build_response(%{status: 200, body: response}, conn)

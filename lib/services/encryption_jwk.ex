@@ -16,4 +16,10 @@ defmodule Fua.Services.EncryptionJwk do
     end
   end
 
+  def encrypt_decrypt(text) do
+    with {:ok, cypher} <- encrypt(text),
+         {:ok, result} <- decrypt(cypher) do
+      {:ok, result}
+    end
+  end
 end
