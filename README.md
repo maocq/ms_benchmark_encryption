@@ -15,8 +15,8 @@ execution: %{
 > El objetivo de este benchmark es realizar una comparación entre el uso de KMS (AWS Key Management Service) vs la implementación de cifrado y descifrado dentro de una instancia de EC2 (c5.large) con el lenguaje Elixir utilizando ex crypto en su versión 0.10.0
 
 ### Resultados
-![Encrypt](results/encrypt.png)
-![Decrypt](results/decrypt.png)
+![Encrypt](results/kms-500/encrypt.png)
+![Decrypt](results/kms-500/decrypt.png)
 
 Nota: En los escenarios de prueba de KMS se obtiene un promedio de 5 peticiones fallidas con el siguiente mensaje:
 
