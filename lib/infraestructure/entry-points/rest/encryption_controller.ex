@@ -25,6 +25,8 @@ defmodule Fua.EntryPoint.Encryption.EncryptionController do
     |> build_response(conn)
   end
 
+  ############### Public key ###############
+
   post "/encrypt" do
     text = conn.body_params["text"] || UUID.uuid1()
 
@@ -34,12 +36,22 @@ defmodule Fua.EntryPoint.Encryption.EncryptionController do
   end
 
   post "/decrypt" do
-    text = conn.body_params["text"] || "Haj6M0Q_sNTzwff8ZtRvPI1PmugeIEXw2uLnpO9FE8C9bTwwUoB_JgIJM0Kv1Ne6c8kHtzHYDjKaiqoVsAq_eh5Bpfxu9F9KZjwP27dFjusQMLeRxRKP86o9TfzSxdAbV-YdCDXTqFNfVdw-F22fqMSpacjGywra2U6jDqqX8OMZfklR-oGqBDWISEtniouLmqbo6RdAjZJ5PZLEhuhljrU8ta1Q2ow-Xa_G0Wxg1vMs6qO8Dv_iL4SYKW6xXtPpO_LLJzNnGTlbSYVCxcuRt4Lspf181IzquUThkkNoNmm46op39r6crBEDqfKEp9xGVgArLBj2OOuKNr7IhaIz3w=="
+    text = conn.body_params["text"] || "OgT6liqJEqEJ7uoIo9tbtQ0AFYkfMdlwgH/VaN2dIU96df+V9i5TdyfrJZF5ccDbe5chHQNzw6HvnjSLyHznuaVSt7R79skSpkJkaKB3LC4pbGv+vWT6fggzuaxkCffCwc7BzrPln4F2FSSy9kI2n5axqWsRcexbPchyh3nfdGjxvtYAWM/zwxfqKPpecdapXYyf8yW2P8UgFsPCPk76FGA99+uWUMkt/NDKpHGlDorJjbRWFVBSngSVfeU8Vdkdzu+OSG4NHBjFijrLH5hwlk1j2EeOkifKqgP2eAsAkIZgE5l4Rml1oqcZyIxN+v5iYu+VCY7phdXNnRA3Zzdr9g=="
 
     with {:ok, response} <- Encryption.decrypt(text) do
       build_response(%{status: 200, body: response}, conn)
     else error -> handle_error(error, conn) end
   end
+
+  get "/encrypt-decrypt" do
+    text = UUID.uuid1()
+
+    with {:ok, response} <- Encryption.encrypt_decrypt(text) do
+      build_response(%{status: 200, body: response}, conn)
+    else error -> handle_error(error, conn) end
+  end
+
+  ############### Jwk ###############
 
   post "/encrypt-jwk" do
     text = conn.body_params["text"] || UUID.uuid1()
@@ -65,6 +77,8 @@ defmodule Fua.EntryPoint.Encryption.EncryptionController do
     else error -> handle_error(error, conn) end
   end
 
+  ############### Kms ###############
+
   post "/encrypt-kms" do
     text = conn.body_params["text"] || UUID.uuid1()
 
@@ -77,6 +91,14 @@ defmodule Fua.EntryPoint.Encryption.EncryptionController do
     text = conn.body_params["text"] || "P1EJu73bKk0FcEqGQYKrLZi6sV/cp4QWKvPmLdmZcN9jV6Wv05CMFh+DsQDWuChxO9a2r8wc7H7epHNXRgguHwW+mnEc2b0hjDTTjcJvNycnHhj6c88emFia05Y0K1i8ghMZj6NtmSDKmh+DXfpLzvlPSSxwUoePY8yiK/+4T8bAuYEprPiD99sEeBhpz2yTfFJWmm98MVSfGmCcRk4xqOt/Yn0CfyNcJvmGzLyUMDFl5LVWccygT/j4c4xVQ2YVO8fYtaIYRrGxSZk/KH9Xh6Q3kDV89/rSd9sKBZU/7Wbj/jFDIi55IzTfieOPmKWKhte69Q5GEDuGMUlv63gh689woHCZSBs5UI9ciCP7kP9dbiKtTq1JrV5PxmfpWTaQX18Z9rGrOgdS5vDBFy2KpUczgiF56pUcCjfmGuJQHFiX7k6iZ67PhfslADHQlTKI1Z+54yLJdiNrjL8tV94NZSpGDM+WPn2MLWrMtmal5NupQJeypmth633Yhgg6HrrTuOTqCdp+vzPdBWE2SLIjiqWlIoAWvKW6Dobv+83gwXxf6h3xD2GUUf9dSgakdCibNwBiOkgGyA6/gbcS+u5X+ENBGZbTahT+6/rxLUWOidUG/X0g63/VKkSakTmqvXVIOd2k866Dpg2Aw7N79RenkoZTHtRt3/NfzTV9xoRw4pk="
 
     with {:ok, response} <- Kms.decrypt(text) do
+      build_response(%{status: 200, body: response}, conn)
+    else error -> handle_error(error, conn) end
+  end
+
+  get "/encrypt-decrypt-kms" do
+    text = UUID.uuid1()
+
+    with {:ok, response} <- Kms.encrypt_decrypt(text) do
       build_response(%{status: 200, body: response}, conn)
     else error -> handle_error(error, conn) end
   end

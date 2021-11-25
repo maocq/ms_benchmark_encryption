@@ -20,6 +20,13 @@ defmodule Fua.Services.Kms do
     end
   end
 
+  def encrypt_decrypt(text) do
+    with {:ok, cypher} <- encrypt(text),
+         {:ok, result} <- decrypt(cypher) do
+      {:ok, result}
+    end
+  end
+
   def _get_public_key do
     ExAws.KMS.get_public_key(@key_id) |> ExAws.request
   end

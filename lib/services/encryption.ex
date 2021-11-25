@@ -1,18 +1,44 @@
 defmodule Fua.Services.Encryption do
 
-  @public_key ExPublicKey.loads!("-----BEGIN RSA PUBLIC KEY-----\nMIIBCgKCAQEA5i4HAjuGgYo9Pj+IzLFaVIanTPZ06Ae041FyUIb0WAS977xRTQeP\nJMDa1WxCZWkx0/9AD98m5vXaPKX8gjdELfUJ5JYj2fx0l8O3kXSuYOpUlMXwWvkp\nfyA0a3fTjn96YWYhhy9ZY2GLFv3B23cr3TQ+mmrtKxjmeMP9MYfY6AJ5EV3o8XBo\n6/BubfJVd0PJMrla1SECUGHdn2P9+KIhRork/BX9bnjBCeWU1o/7ued6qVskINII\nLnP6nm8P49exRUBf783R6t2uLSc7MiSrPsHjXFXywt96+XiuwH1Fc1VwHUY8ob8+\nB9yKCa1usc869d8sEZCMd/hq5z2cLs/SSQIDAQAB\n-----END RSA PUBLIC KEY-----\n\n")
-  @private_key ExPublicKey.loads!("-----BEGIN RSA PRIVATE KEY-----\nMIIEpQIBAAKCAQEA5i4HAjuGgYo9Pj+IzLFaVIanTPZ06Ae041FyUIb0WAS977xR\nTQePJMDa1WxCZWkx0/9AD98m5vXaPKX8gjdELfUJ5JYj2fx0l8O3kXSuYOpUlMXw\nWvkpfyA0a3fTjn96YWYhhy9ZY2GLFv3B23cr3TQ+mmrtKxjmeMP9MYfY6AJ5EV3o\n8XBo6/BubfJVd0PJMrla1SECUGHdn2P9+KIhRork/BX9bnjBCeWU1o/7ued6qVsk\nINIILnP6nm8P49exRUBf783R6t2uLSc7MiSrPsHjXFXywt96+XiuwH1Fc1VwHUY8\nob8+B9yKCa1usc869d8sEZCMd/hq5z2cLs/SSQIDAQABAoIBACAxY82OIbvQZ8xi\n+nEWhPm5c4CyH5usKEJ6y7Azj80XrLDw97X8TqrnRjP/VjH0yoFJ+928aiZ3UDSX\nSn+z1xdOZDnSPeVpB62KNAxl81WesIG2RW2T15fuGybEtZQChE1HCX1sw+XAaMGo\ncAqP2lSvz+ms9srGSsWtM6ZPx6h7HCMcGh+IeyBfENu5v63N73YQoYjrILIRaAHj\n86SxnxcCrQPDyAM7Ow7DioUehzEigZRgRih0Ob3YjViclQuWmsmygZ8z7mm6fPis\nAxHuVRf8RZMSFRGnElqBfK7XkWWo0qIgCV+4be7cbTvBeZKj6OD1+VbDfoc/op6M\nXsT7aRkCgYEA+QClGUb/wJ6Y0TNNGhtJ4BGGYmbOLx4udSts+ZeuwI2s2DB0G8cQ\nqS9a8454ZeK31wTYeeAfKEAiZhLxF8Q+KSySTYSUq7pfiN4afO8BtqqDIX8fWvyQ\npMATRdz70TsuED8h8nkX8e4JYwnSbatfERAczXN8pg0Gz/d6txae2RcCgYEA7KX4\nLSCeuOyW+rbbp6AwunzcSf9CFAO5Pj5Xf3kaJlUN+djZPlnXE38yK4Nie6b9ETZq\nzGr5FWK4RVxZcoFAF2vROdz2vngwpnozdd7/rhOe2Kw8HnUHne43A41PEBYhOMvN\nKgwA53am2pRratFxWaHeAuCGtZOasWL4UJWlC58CgYEA0si++fTmT3JyPrXE0RLE\nqM9tCSOp6q0L+tf1+htzLUFBTglGYLVU30NdJMw4E1em9Hf/oLwe4/3WoL3sJYhU\nbppyhvhyuiSc9sm9doEE3FLfip2IN4eSEkUei4eUC/yi89HdtNrZcE1m2NXZskjd\nwx32o9zdaduhJq+CzDZz5aUCgYEAt5m0yF5MhrCYGoAQPycbZzREPOzbuWeCKvZ3\nMCEm1qKaq0NAmQ1evnOq2vOeTs0p/la32U0NXzguOzIA+8OnlAREWZ5DmVbqd97L\nWiHfQJFcZkKKih7GABO3fvv9YT+qGsSTspGJigsWPPN1u3QvexkIhDbqjKmuFP3y\nJaNUX4UCgYEAm2hucJO3uvMgGO9hOxfbB7WBJ+K/WJ2wHr10LAEn0ohofXs/veSV\nT1EJJPmZh3PJ6L44vjzAeDl9YVJ1nQP5/rPFUXJKornSpBTcwkflORubEMsi0Yfp\nRaOfXE7DMzEOw+8J9EZeA+JB67MCBT32a1w00YOVO8RXQO+Vc4T78PI=\n-----END RSA PRIVATE KEY-----\n\n")
+  @public_key_text "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAlUSqWjbEGyOv0/tSlj+r\nRqrPtv/4wz3b4E7poWdLRiNjaTP6YaBmp9vxkg55VXAXtoZVXze9Xgh/pQ4uNHbb\n2cTTpaMdUZ1HsSf8YueJjBgCIfjFOk0MKnAokT5fx9K5A4hh5j0P8kyRVMvpMjdp\nPhLcTHQeBbrgWyvuKzU9R27MwRnhkc8XkwAzqJfq/PMH9pkcWlb393CB5gip+1XM\nHcmydHl7+i8LZYRxhp3czz0PhmLeXO0y6Dyc+vJKuU+x6Og57W81+OjP0U5QYjn2\nHECWHWXLzOHI9GCasIK8kypiDCRbi6eDqXHfmDnR7ve5K69x4bASQlRVGKCDEJyD\nfwIDAQAB\n-----END PUBLIC KEY-----"
+  @private_key_text "-----BEGIN RSA PRIVATE KEY-----\nMIIEpAIBAAKCAQEAlUSqWjbEGyOv0/tSlj+rRqrPtv/4wz3b4E7poWdLRiNjaTP6\nYaBmp9vxkg55VXAXtoZVXze9Xgh/pQ4uNHbb2cTTpaMdUZ1HsSf8YueJjBgCIfjF\nOk0MKnAokT5fx9K5A4hh5j0P8kyRVMvpMjdpPhLcTHQeBbrgWyvuKzU9R27MwRnh\nkc8XkwAzqJfq/PMH9pkcWlb393CB5gip+1XMHcmydHl7+i8LZYRxhp3czz0PhmLe\nXO0y6Dyc+vJKuU+x6Og57W81+OjP0U5QYjn2HECWHWXLzOHI9GCasIK8kypiDCRb\ni6eDqXHfmDnR7ve5K69x4bASQlRVGKCDEJyDfwIDAQABAoIBAE1gDr487WL0GMzV\n1nW0A2DaYloGTjlG85dO0KSuGsL8zSdXnk7FCvGwfYSspBC5zlD7SX3WMv9vgFtb\nAnCHvGciNGQELcqEsQkQJTBPvWk1eMWLYxFZpxjIkv7XSmcWwHkoVTc4J+/96Mf/\n+53gQ1m+BRxMhNOLj4kzOH6FVoKUCfj2IyZjg9oJ8nFudf/9ojfJ8iR6+siL3dbl\nKwxpJEbG6Z0kI9Hr3pOABa2ORwtxSdTooWGcZLknR78MqTZ29eHe8FD4CjsBt8X3\neNf1oJrdQANvYAq8mAlZWCi6upraLptaBIfMoTFLtpwCJiMAgBkpwmUkMdCLej5m\nZIuQJkECgYEA7+4J+0QJHbdGOcmw6suU/jLODNHFZIUM0U+FTbwDwxc5NDFYSpJm\na4hfoVyhya32v4pRlUEv2yNhRiN7wsW6WqV2qyuAVu87IQ61WlQ0EyPf+x53qmyj\nG1lb6+PExWjNu1Ar1EheJwQvYGS0imr7Rg/ImSxLPasOPXBPDCDI1XcCgYEAn0QY\ndZEm3f61VJqu4TfSEew2iL+KQcOp5127cNpXfGGpPLtqQEe+nQkC/AJobrCZfv2G\npKJXr1I5loPf96qERxIYG8PE44lFnCJtFSqE5xiV75m/HLAeGncrIhv3AAP0WOzM\nAkK0gsqZdWg0Nch653JGrDoAUCtiWFQ+/sYx5DkCgYEAnP5yU5KiMGqTLg72j7xk\noqyVvTep5OtWhsN043eKMqbIjIlZT3paQDS89nYJe1E0qwKT/YjpCogtB1sCiWEe\nXl/0tW5CjR/+3dOlARUl+fw4fDXkcYSieavQBRtFzzKTo+SCuWYdDYSkh3t90zDL\neH2tceTU2uZJ7BPH9ZSiNWMCgYBcgl4+s+BCpDdJfEvGL/lKRc1rYu54wqFG7a/5\nnimg6s01pJrT2ZiDeH+OSAvG97dBBxwVNuL9yCIBJnqKTjZlXcI5Jl6P1+ViCrEX\n0Um/Pg2hTcmvbTEfKEcamem/zYw5ttnNGlflfK7kfnGNJ/UTyNH6KfqSlpCaQ90P\neanzKQKBgQCkSBftOGKr90K8lKcKCuS5Whj0klsjngnbOZXc89qeip9/qLh/xTQa\nXqOvgeVJtPrzhLwQegzHQDRUH2JeqZdgH3hWvlhJw9toUHSK+UxbJP4P4/bFdPKV\n5GywRIclZrowsShU4qAumSed+6ETN56i40BqRC+GkEHRNc9F13FAHA==\n-----END RSA PRIVATE KEY-----"
+
+  @private_key :public_key.pem_entry_decode(List.first(:public_key.pem_decode(@private_key_text)), "password")
+  @public_key :public_key.pem_entry_decode(List.first(:public_key.pem_decode(@public_key_text)))
+
+  @options [rsa_padding: :rsa_pkcs1_oaep_padding, rsa_oaep_md: :sha256]
 
   def encrypt(text) do
-    text
-      |> Base.encode64
-      |> ExPublicKey.encrypt_public(@public_key)
+    case encrypt_public(text, @public_key) do
+      {:ok, encrypt} -> {:ok, encrypt |> Base.encode64}
+      error -> error
+    end
   end
 
-  def decrypt(cif) do
-    with {:ok, dec} <- ExPublicKey.decrypt_private(cif, @private_key) do
-      Base.decode64(dec)
+  def decrypt(text) do
+    with {:ok, cipher_bytes} <- Base.decode64(text),
+         {:ok, decrypt} <- decrypt_private(cipher_bytes, @private_key) do
+       {:ok, decrypt}
     end
+  end
+
+  def encrypt_decrypt(text) do
+    with {:ok, cypher} <- encrypt(text),
+         {:ok, result} <- decrypt(cypher) do
+      {:ok, result}
+    end
+  end
+
+  defp encrypt_public(clear_text, rsa_pub_key_seq) do
+    {:ok, :public_key.encrypt_public(clear_text, rsa_pub_key_seq, @options)}
+  catch
+    _kind, _error -> {:error, "Encrypt error"}
+  end
+
+  defp decrypt_private(cipher_bytes, rsa_priv_key_seq) do
+    {:ok, :public_key.decrypt_private(cipher_bytes, rsa_priv_key_seq, @options)}
+  catch
+    _kind, _error -> {:error, "Decrypt error"}
   end
 
 end
