@@ -1,5 +1,7 @@
 # MsBenchmarkEncryption
 
+El objetivo de este benchmark es realizar una comparación entre el uso de KMS (AWS Key Management Service) vs la implementación de cifrado y descifrado dentro de una instancia de EC2 (c5.large) con el lenguaje Elixir utilizando ex crypto en su versión 0.10.0 y Java reactivo.
+
 ### Configuración de la prueba
 
 - Pruebas realizada con: [Performance Analyzer](https://github.com/bancolombia/distributed-performance-analyzer).
@@ -11,8 +13,6 @@ execution: %{
  constant_load: false
 }
 ```
-
-El objetivo de este benchmark es realizar una comparación entre el uso de KMS (AWS Key Management Service) vs la implementación de cifrado y descifrado dentro de una instancia de EC2 (c5.large) con el lenguaje Elixir utilizando ex crypto en su versión 0.10.0 y Java con reactivo.
 
 Nota: El valor predeterminado de la cuota de AWS ([Cryptographic operations (RSA) request rate]) es de 500 por segundo (compartidas) para claves KMS de RSA. 
 En los escenarios que se describen a continuación la cuota fue modificada a 1000 transacciones por segundo, puede seguir el siguiente link si desea ver los [resultados para los valores por defecto]
