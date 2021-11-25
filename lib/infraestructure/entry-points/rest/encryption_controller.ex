@@ -62,7 +62,7 @@ defmodule Fua.EntryPoint.Encryption.EncryptionController do
   end
 
   post "/decrypt-jwk" do
-    text = conn.body_params["text"] || "eyJhbGciOiJSU0EtT0FFUC0yNTYiLCJlbmMiOiJBMTI4R0NNIn0.bwkZURq9x4LnlBCuNxO0oJ16hsjjf46dKdYmJ8fL-8ZDJEzjjRRi0wJ5lr4WuxUvJcmgDUYJ7fWemM1XperpVbDjTN_c8SAUUQrzqzknb_7yUTj8kKFSulSOg96iAC6rN9WFIPdftouNf6ezg6ZT5YrIqeNmgpEQqQDAPZLI5rXUuLmP-cIwJ_ee7LmjYqa3uN9nDKW0-3ghGYdpx41jM5SR7l-EppQaownahxImoWokEqNgTB3m6SHGLuKlP9KetjSjn02TpHZ5YYiEZsTZYS-oftyRhhgDQmzXLKw1S7mvvF018vFVuSJonG5hBVKUgiHGKkf01Wbm4IL-cRrmpQ.Tp_cwuMo_clJkeLy.f6rR2DY.DxAo1YpD4Mhv2Q_PF26gLA"
+    text = conn.body_params["text"] || "eyJhbGciOiJSU0EtT0FFUC0yNTYiLCJlbmMiOiJBMTI4R0NNIn0.H29knCM1b80ILfCVXJp-ZASZx2gEiHs2ViQ1wuaKAeMLfEYUr3rg_yN4v0Vsh4jCbIjJeFt6_bf68vyzmJeeZYvpyAVrq7nSd1_z0nanAHxP8_IAVgHLgOmiIxR2qyD0Koq7SvdtYSlMGqdRDBRXLM3ZgbfkyAS5lHXnZV-cQARUfcOaHYMDdvS_sZujetJGmJRAtpXDZi-GrF8VEYoVfeeAtRKKLHdDa1FJFN2XmLSVscdVboj1z6EmFI08x_cpiA_2LxJhp3Ms8oHlYrCnL8MliqoNo078DAONu10Y7v8HZWdcGKY0a8p9tztUMjOhzH7NaFo3M7JVlSBp1iblQQ.iqoGe_BQH7FdenBj.fyHXI3t2X_x7KBjR_dYyg7qpDWKkbsJTdOk5Y4tiWdcMFLsM.nT-_Blmbpfft4_6BqdhrUg"
 
     with {:ok, response} <- EncryptionJwk.decrypt(text) do
       build_response(%{status: 200, body: response}, conn)
@@ -88,7 +88,7 @@ defmodule Fua.EntryPoint.Encryption.EncryptionController do
   end
 
   post "/decrypt-kms" do
-    text = conn.body_params["text"] || "P1EJu73bKk0FcEqGQYKrLZi6sV/cp4QWKvPmLdmZcN9jV6Wv05CMFh+DsQDWuChxO9a2r8wc7H7epHNXRgguHwW+mnEc2b0hjDTTjcJvNycnHhj6c88emFia05Y0K1i8ghMZj6NtmSDKmh+DXfpLzvlPSSxwUoePY8yiK/+4T8bAuYEprPiD99sEeBhpz2yTfFJWmm98MVSfGmCcRk4xqOt/Yn0CfyNcJvmGzLyUMDFl5LVWccygT/j4c4xVQ2YVO8fYtaIYRrGxSZk/KH9Xh6Q3kDV89/rSd9sKBZU/7Wbj/jFDIi55IzTfieOPmKWKhte69Q5GEDuGMUlv63gh689woHCZSBs5UI9ciCP7kP9dbiKtTq1JrV5PxmfpWTaQX18Z9rGrOgdS5vDBFy2KpUczgiF56pUcCjfmGuJQHFiX7k6iZ67PhfslADHQlTKI1Z+54yLJdiNrjL8tV94NZSpGDM+WPn2MLWrMtmal5NupQJeypmth633Yhgg6HrrTuOTqCdp+vzPdBWE2SLIjiqWlIoAWvKW6Dobv+83gwXxf6h3xD2GUUf9dSgakdCibNwBiOkgGyA6/gbcS+u5X+ENBGZbTahT+6/rxLUWOidUG/X0g63/VKkSakTmqvXVIOd2k866Dpg2Aw7N79RenkoZTHtRt3/NfzTV9xoRw4pk="
+    text = conn.body_params["text"] || "o5O4eF55poV90oP3F0cMIkY0mGPX5OrV6ATOVXOdn8eVIpY5Lckm6GzLRhHCbK9En58ymfIPAH2K4Fa7Nh09BCKsjfspfblUvyOSWnrNz47F0hghPnSYymGesEy410t/OoK0CsfbPHpdEX5Me4JuBpC7d05/Ow0evH2tpX12PgemtLMXYaW8pCVCmGoaVO2CqO9AW+trSw5av78WEigY4FtIKytl60LcPIEDMTC9j4lLwyckwxexEpR6MsUEjMrE7o+QOkuAudWYrS83R9PbacEpYFrFy3JJ+qoN60YN/XFlHlfjHpL0dYZgczb7iPXGJ9dTyCmIzmbY60+w25JEtE/QGt8+4+CKn+7aYY92kCwYoR4edyju29GYl7Pq+OWgZ2Vfeqj0z2HZ7sS1jUgKdrFCmw2kFv87tHbJJdVDT+XUGfhEf4VDzbukpIFvkqIxPrk1YF69yCx3HSZcUDbCGsSp1tKqNo9GH+1s/E4f6qKTJae6aawcR7UqA+ps45AXEGkIu+sW97SjIvzwtN/LaEwt5IOnVkKXFXP8Kg9jSvbIitLbwaUNVBZWoQhExJwYF/Rl6JlzCgQnB1vp//eEy7ocTBHixrmnB3FPm/RUmzLh9e1xNsEbcLiq9EXT8gUDVPVGwCaWpc1ahtF9NcEp231BAB5LBJ3yWimkk5kYJkU="
 
     with {:ok, response} <- Kms.decrypt(text) do
       build_response(%{status: 200, body: response}, conn)
