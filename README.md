@@ -44,6 +44,8 @@ Nota: En los escenarios de alto uso de KMS es posible obtener mensajes de error 
 
 1 instancia x 0.085 USD x 730 horas en un mes = 62.05 USD (monthly onDemand cost)
 
+## Una pequeña comparación 
+
 | Kms                                                                                                                                                                               | Implementación (Elixir - Java)                                                   |
 |-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------|
 | Rotación de llaves automática                                                                                                                                                     | Se debe realizar el manejo de llaves y rotación de llaves                        |
