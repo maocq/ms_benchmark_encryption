@@ -44,6 +44,12 @@ Nota: En los escenarios de alto uso de KMS es posible obtener mensajes de error 
 
 1 instancia x 0.085 USD x 730 horas en un mes = 62.05 USD (monthly onDemand cost)
 
+| Kms                                                                                                                                                                               | Implementación (Elixir - Java)                                                   |
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------|
+| Rotación de llaves automática                                                                                                                                                     | Se debe realizar el manejo de llaves y rotación de llaves                        |
+| Si ya se tienen alguna implementación y esta no coincide con el manejo de encode o de máscaras de Kms, se debe ajustar estas partes para que coincidan con los soportados con Kms | Implementación según necesidad                                                   |
+| Las transacciones por segundo son limitadas según la cuota que se tenga en aws (así se tengan múltiples instancias consumiendo el servicio)                                       | Las transacciones por segundo pueden aumentar aumentando el numero de instancias |
+| No es posible aumentar automáticamente la capacidad, debe ser vía solicitud a aws de aumento de cuota                                                                             | La infraestructura puede aumentar según demanda                                  |
 
 
 [Cryptographic operations (RSA) request rate]: <https://docs.aws.amazon.com/es_es/kms/latest/developerguide/requests-per-second.html>
